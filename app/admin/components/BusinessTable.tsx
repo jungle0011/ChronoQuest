@@ -107,7 +107,7 @@ export default function BusinessTable() {
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <div className="flex space-x-3">
                   <Link
-                    href={`/admin/business/${business.id}/edit`}
+                    href={business.id.startsWith('sample-') ? `/edit/${business.id}` : `/admin/business/${business.id}/edit`}
                     className="text-indigo-600 hover:text-indigo-900"
                   >
                     <FaEye className="h-5 w-5" />
