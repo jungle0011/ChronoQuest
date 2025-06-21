@@ -1,8 +1,14 @@
-export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation"
 import SitePageClient from "@/components/SitePageClient"
-import nextDynamic from "next/dynamic"
-const LeafletMap = nextDynamic(() => import('@/components/LeafletMap'), { ssr: false })
+import { sampleBusinesses } from "@/lib/sample-data"
+import { SavedBusiness } from "@/lib/types"
+
+// This function tells Next.js which pages to build at build time
+export async function generateStaticParams() {
+  return sampleBusinesses.map((business) => ({
+    id: business.id,
+  }))
+}
 
 interface PageProps {
   params: {
@@ -10,31 +16,36 @@ interface PageProps {
   }
 }
 
-export default async function SitePage({ params }: PageProps) {
+async function getBusinessData(id: string): Promise<SavedBusiness | null> {
+  // For sample businesses, get data directly from the local file
+  if (id.startsWith('sample-')) {
+    const business = sampleBusinesses.find((b) => b.id === id)
+    return business || null
+  }
+
+  // For real businesses, fetch from the API
   try {
-    // Add timestamp to ensure fresh data
-    const timestamp = Date.now();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/business?id=${params.id}&t=${timestamp}`, {
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache'
-      }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/business?id=${id}`, {
+      next: { revalidate: 60 } // Revalidate every 60 seconds
     });
     
     if (!response.ok) {
-      throw new Error('Failed to fetch business');
+      return null;
     }
     
-    const business = await response.json();
-    
-    if (!business) {
-      notFound();
-    }
-    
-    return <SitePageClient business={business} />;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching business:', error);
+    return null;
+  }
+}
+
+export default async function SitePage({ params }: PageProps) {
+  const business = await getBusinessData(params.id);
+  
+  if (!business) {
     notFound();
   }
+  
+  return <SitePageClient business={business} />;
 }
