@@ -1,0 +1,151 @@
+{
+  "id": "sample-restaurant-1",
+  "slug": "fresh-bites-restaurant",
+  "fullName": "Adebayo Johnson",
+  "businessName": "Fresh Bites Restaurant",
+  "businessDescription": "We serve delicious local and continental dishes made with fresh, locally-sourced ingredients in a warm, welcoming atmosphere.",
+  "productDescription": "Our menu features authentic Nigerian cuisine alongside international favorites, prepared by expert chefs with passion for culinary excellence.",
+  "location": "Victoria Island, Lagos",
+  "fullAddress": "123 Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
+  "businessPlan": "Our mission is to become Lagos' premier dining destination by combining traditional Nigerian flavors with modern culinary techniques, while supporting local farmers and suppliers.",
+  "logoUrl": "",
+  "siteStyle": "elegant",
+  "colorScheme": "orange",
+  "fontStyle": "classic",
+  "layoutStyle": "centered",
+  "contactOption": "both",
+  "contactNumber": "+234 801 234 5678",
+  "interestedInPremium": true,
+  "language": "en",
+  "coordinates": {
+    "lat": 6.4281,
+    "lng": 3.4219
+  },
+  "showMap": true,
+  "whatsappSettings": {
+    "welcomeMessage": "Hi! Welcome to Fresh Bites Restaurant. How can we help you today?",
+    "businessHours": true,
+    "autoReply": true,
+    "chatPosition": "bottom-right"
+  },
+  "enableAI": true,
+  "enableAnalytics": true,
+  "enableSEO": true,
+  "enableLeadCapture": true,
+  "enableBooking": true,
+  "enableReviews": true,
+  "socialLinks": {
+    "facebook": "https://facebook.com/freshbitesrestaurant",
+    "instagram": "@freshbiteslagos"
+  },
+  "businessHours": {
+    "monday": "10:00 AM - 10:00 PM",
+    "tuesday": "10:00 AM - 10:00 PM",
+    "wednesday": "10:00 AM - 10:00 PM",
+    "thursday": "10:00 AM - 10:00 PM",
+    "friday": "10:00 AM - 11:00 PM",
+    "saturday": "9:00 AM - 11:00 PM",
+    "sunday": "12:00 PM - 9:00 PM"
+  },
+  "keywords": [
+    "restaurant",
+    "Nigerian cuisine",
+    "Lagos dining",
+    "fresh food"
+  ],
+  "aiGeneratedReviews": [
+    {
+      "name": "Chioma Okafor",
+      "rating": 5,
+      "comment": "The food here is absolutely amazing! Fresh ingredients and authentic flavors. Will definitely be back!",
+      "location": "Lagos",
+      "verified": true
+    },
+    {
+      "name": "Ibrahim Musa",
+      "rating": 5,
+      "comment": "Best dining experience I've had in Lagos. The service was exceptional and the atmosphere perfect.",
+      "location": "Abuja",
+      "verified": true
+    },
+    {
+      "name": "Funmi Adeyemi",
+      "rating": 4,
+      "comment": "Outstanding cuisine and friendly staff. This place never disappoints!",
+      "location": "Lagos",
+      "verified": false
+    }
+  ],
+  "analytics": {
+    "views": 1247,
+    "clicks": 89,
+    "leads": 23,
+    "whatsappClicks": 45,
+    "phoneClicks": 31,
+    "mapClicks": 13,
+    "lastVisit": "2025-06-17T18:03:58.528Z",
+    "dailyStats": {
+      "2024-01-15": {
+        "views": 45,
+        "clicks": 3,
+        "leads": 1
+      },
+      "2024-01-14": {
+        "views": 52,
+        "clicks": 4,
+        "leads": 2
+      },
+      "2024-01-13": {
+        "views": 38,
+        "clicks": 2,
+        "leads": 0
+      },
+      "2024-01-12": {
+        "views": 61,
+        "clicks": 5,
+        "leads": 3
+      },
+      "2024-01-11": {
+        "views": 43,
+        "clicks": 3,
+        "leads": 1
+      },
+      "2024-01-10": {
+        "views": 55,
+        "clicks": 4,
+        "leads": 2
+      },
+      "2024-01-09": {
+        "views": 49,
+        "clicks": 3,
+        "leads": 1
+      }
+    },
+    "topPages": [
+      {
+        "page": "Landing Page",
+        "views": 856
+      },
+      {
+        "page": "Contact Section",
+        "views": 234
+      },
+      {
+        "page": "Services",
+        "views": 157
+      }
+    ],
+    "deviceStats": {
+      "mobile": 68,
+      "desktop": 25,
+      "tablet": 7
+    },
+    "locationStats": {
+      "Nigeria": 78,
+      "Ghana": 12,
+      "Kenya": 6,
+      "South Africa": 4
+    }
+  },
+  "createdAt": "2025-06-17T18:03:58.528Z"
+}

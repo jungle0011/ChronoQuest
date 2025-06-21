@@ -1,0 +1,145 @@
+{
+  "id": "sample-beauty-3",
+  "slug": "beauty-wellness-spa",
+  "fullName": "Blessing Okoro",
+  "businessName": "Beauty & Wellness Spa",
+  "businessDescription": "Your premier destination for beauty treatments, wellness services, and relaxation in a serene, professional environment.",
+  "productDescription": "We offer a full range of beauty services including facials, massages, hair treatments, nail care, and wellness therapies using premium products.",
+  "location": "Ikeja, Lagos",
+  "fullAddress": "78 Allen Avenue, Ikeja, Lagos, Nigeria",
+  "businessPlan": "To become Lagos' most trusted beauty and wellness destination by providing exceptional services that enhance our clients' natural beauty and well-being.",
+  "logoUrl": "",
+  "siteStyle": "luxury",
+  "colorScheme": "rose",
+  "fontStyle": "luxury",
+  "layoutStyle": "centered",
+  "contactOption": "whatsapp",
+  "contactNumber": "+234 803 456 7890",
+  "interestedInPremium": true,
+  "language": "en",
+  "coordinates": {
+    "lat": 6.6018,
+    "lng": 3.3515
+  },
+  "showMap": true,
+  "whatsappSettings": {
+    "welcomeMessage": "Welcome to Beauty & Wellness Spa! How can we pamper you today?",
+    "businessHours": true,
+    "autoReply": true,
+    "chatPosition": "bottom-right"
+  },
+  "enableAI": true,
+  "enableAnalytics": true,
+  "enableSEO": true,
+  "enableLeadCapture": true,
+  "enableBooking": true,
+  "enableReviews": true,
+  "socialLinks": {
+    "instagram": "@beautywellnessspa",
+    "facebook": "https://facebook.com/beautywellnessspa"
+  },
+  "businessHours": {
+    "monday": "9:00 AM - 7:00 PM",
+    "tuesday": "9:00 AM - 7:00 PM",
+    "wednesday": "9:00 AM - 7:00 PM",
+    "thursday": "9:00 AM - 7:00 PM",
+    "friday": "9:00 AM - 8:00 PM",
+    "saturday": "8:00 AM - 8:00 PM",
+    "sunday": "10:00 AM - 6:00 PM"
+  },
+  "keywords": [
+    "beauty spa",
+    "wellness",
+    "massage",
+    "facial treatments",
+    "Lagos"
+  ],
+  "aiGeneratedReviews": [
+    {
+      "name": "Ngozi Eze",
+      "rating": 5,
+      "comment": "Amazing service! I left feeling absolutely beautiful and confident.",
+      "location": "Lagos",
+      "verified": true
+    },
+    {
+      "name": "Kemi Adebisi",
+      "rating": 5,
+      "comment": "Professional staff and high-quality products. My skin has never looked better!",
+      "location": "Lagos",
+      "verified": true
+    }
+  ],
+  "analytics": {
+    "views": 1456,
+    "clicks": 112,
+    "leads": 34,
+    "whatsappClicks": 78,
+    "phoneClicks": 0,
+    "mapClicks": 34,
+    "lastVisit": "2025-06-16T20:42:31.288Z",
+    "dailyStats": {
+      "2024-01-15": {
+        "views": 58,
+        "clicks": 5,
+        "leads": 2
+      },
+      "2024-01-14": {
+        "views": 62,
+        "clicks": 6,
+        "leads": 3
+      },
+      "2024-01-13": {
+        "views": 45,
+        "clicks": 3,
+        "leads": 1
+      },
+      "2024-01-12": {
+        "views": 71,
+        "clicks": 7,
+        "leads": 4
+      },
+      "2024-01-11": {
+        "views": 53,
+        "clicks": 4,
+        "leads": 2
+      },
+      "2024-01-10": {
+        "views": 67,
+        "clicks": 6,
+        "leads": 3
+      },
+      "2024-01-09": {
+        "views": 59,
+        "clicks": 5,
+        "leads": 2
+      }
+    },
+    "topPages": [
+      {
+        "page": "Landing Page",
+        "views": 1012
+      },
+      {
+        "page": "Services",
+        "views": 298
+      },
+      {
+        "page": "Booking",
+        "views": 146
+      }
+    ],
+    "deviceStats": {
+      "mobile": 82,
+      "desktop": 15,
+      "tablet": 3
+    },
+    "locationStats": {
+      "Nigeria": 92,
+      "Ghana": 5,
+      "Kenya": 2,
+      "South Africa": 1
+    }
+  },
+  "createdAt": "2025-06-16T20:42:31.288Z"
+}

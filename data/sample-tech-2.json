@@ -1,0 +1,146 @@
+{
+  "id": "sample-tech-2",
+  "userId": "sample-user-2",
+  "plan": "basic",
+  "slug": "tech-solutions-hub",
+  "fullName": "Emeka Nwankwo",
+  "businessName": "Tech Solutions Hub",
+  "businessDescription": "We deliver cutting-edge technology solutions that empower businesses to thrive in the digital age through innovation and expertise.",
+  "productDescription": "Comprehensive tech services including software development, digital transformation, cloud solutions, and IT consulting tailored to your business needs.",
+  "location": "Lekki, Lagos",
+  "fullAddress": "45 Admiralty Way, Lekki Phase 1, Lagos, Nigeria",
+  "businessPlan": "We aim to be the leading technology partner for Nigerian businesses seeking digital excellence, focusing on delivering scalable, secure, and innovative solutions.",
+  "logoUrl": "",
+  "ownerPictureUrl": "",
+  "siteStyle": "modern",
+  "colorScheme": "blue",
+  "fontStyle": "tech",
+  "layoutStyle": "card-based",
+  "contactOption": "both",
+  "contactNumber": "+234 802 345 6789",
+  "interestedInPremium": true,
+  "language": "en",
+  "coordinates": {
+    "lat": 6.4474,
+    "lng": 3.4539
+  },
+  "showMap": true,
+  "whatsappSettings": {
+    "welcomeMessage": "Hello! Welcome to Tech Solutions Hub. How can we assist with your technology needs?",
+    "businessHours": true,
+    "autoReply": true,
+    "chatPosition": "bottom-right"
+  },
+  "enableAI": true,
+  "enableAnalytics": true,
+  "enableSEO": true,
+  "enableLeadCapture": true,
+  "enableBooking": true,
+  "enableReviews": true,
+  "socialLinks": {
+    "linkedin": "https://linkedin.com/company/techsolutionshub",
+    "twitter": "@techsolutionshub"
+  },
+  "businessHours": {
+    "monday": "8:00 AM - 6:00 PM",
+    "tuesday": "8:00 AM - 6:00 PM",
+    "wednesday": "8:00 AM - 6:00 PM",
+    "thursday": "8:00 AM - 6:00 PM",
+    "friday": "8:00 AM - 6:00 PM",
+    "saturday": "9:00 AM - 2:00 PM"
+  },
+  "keywords": [
+    "technology",
+    "software development",
+    "IT consulting",
+    "digital transformation"
+  ],
+  "aiGeneratedReviews": [
+    {
+      "name": "Aisha Abdullahi",
+      "rating": 5,
+      "comment": "Professional service and cutting-edge solutions. They transformed our business operations completely.",
+      "location": "Abuja",
+      "verified": true
+    },
+    {
+      "name": "Tunde Ogundimu",
+      "rating": 5,
+      "comment": "Excellent technical expertise and customer support. Highly recommend for any tech needs.",
+      "location": "Lagos",
+      "verified": true
+    }
+  ],
+  "analytics": {
+    "views": 892,
+    "clicks": 67,
+    "leads": 18,
+    "whatsappClicks": 32,
+    "phoneClicks": 25,
+    "mapClicks": 10,
+    "lastVisit": "2025-06-19T21:38:36.448Z",
+    "dailyStats": {
+      "2024-01-15": {
+        "views": 32,
+        "clicks": 2,
+        "leads": 1
+      },
+      "2024-01-14": {
+        "views": 41,
+        "clicks": 3,
+        "leads": 1
+      },
+      "2024-01-13": {
+        "views": 28,
+        "clicks": 1,
+        "leads": 0
+      },
+      "2024-01-12": {
+        "views": 45,
+        "clicks": 4,
+        "leads": 2
+      },
+      "2024-01-11": {
+        "views": 38,
+        "clicks": 2,
+        "leads": 1
+      },
+      "2024-01-10": {
+        "views": 42,
+        "clicks": 3,
+        "leads": 1
+      },
+      "2024-01-09": {
+        "views": 35,
+        "clicks": 2,
+        "leads": 0
+      }
+    },
+    "topPages": [
+      {
+        "page": "Landing Page",
+        "views": 623
+      },
+      {
+        "page": "Services",
+        "views": 189
+      },
+      {
+        "page": "Contact",
+        "views": 80
+      }
+    ],
+    "deviceStats": {
+      "mobile": 45,
+      "desktop": 48,
+      "tablet": 7
+    },
+    "locationStats": {
+      "Nigeria": 85,
+      "Ghana": 8,
+      "Kenya": 4,
+      "South Africa": 3
+    }
+  },
+  "createdAt": "2025-06-19T21:38:36.448Z"
+}
