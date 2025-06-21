@@ -4,6 +4,7 @@ import { sampleBusinesses } from "@/lib/sample-data"
 import { SavedBusiness } from "@/lib/types"
 
 // This function tells Next.js which pages to build at build time
+// Only generate static pages for sample businesses
 export async function generateStaticParams() {
   return sampleBusinesses.map((business) => ({
     id: business.id,
@@ -25,7 +26,8 @@ async function getBusinessData(id: string): Promise<SavedBusiness | null> {
 
   // For real businesses, fetch from the API
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/business?id=${id}`, {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    const response = await fetch(`${baseUrl}/api/business?id=${id}`, {
       next: { revalidate: 60 } // Revalidate every 60 seconds
     });
     
