@@ -36,20 +36,39 @@ export default function EditBusinessPage({ params }: { params: { id: string } })
   useEffect(() => {
     const fetchBusiness = async () => {
       try {
+        console.log('Fetching business with ID:', params.id);
         const response = await fetch(`/api/business/${params.id}`);
+        console.log('Response status:', response.status);
+        
         if (!response.ok) {
-          throw new Error('Business not found');
+          const errorData = await response.json().catch(() => ({}));
+          console.error('API Error:', errorData);
+          throw new Error(`Business not found: ${response.status} ${errorData.error || ''}`);
         }
+        
         const data = await response.json();
+        console.log('Business data received:', data);
+        
+        if (!data || !data.id) {
+          throw new Error('Invalid business data received');
+        }
+        
         setBusiness(data);
         setPlan(data.interestedInPremium ? 'premium' : 'basic');
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch business details');
+        console.error('Error fetching business:', error);
+        setError(`Failed to fetch business details: ${error instanceof Error ? error.message : 'Unknown error'}`);
         setLoading(false);
       }
     };
-    fetchBusiness();
+    
+    if (params.id) {
+      fetchBusiness();
+    } else {
+      setError('No business ID provided');
+      setLoading(false);
+    }
   }, [params.id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,10 +107,42 @@ export default function EditBusinessPage({ params }: { params: { id: string } })
   };
 
   if (loading) {
-    return <div className="text-center py-4">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="text-lg font-semibold mb-2">Loading business details...</div>
+          <div className="text-sm text-gray-600">Business ID: {params.id}</div>
+        </div>
+      </div>
+    );
   }
+  
   if (error || !business) {
-    return <div className="text-center py-4 text-red-500">{error || 'Business not found'}</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-2xl">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-red-600 mb-4">Error Loading Business</h1>
+            <div className="text-red-500 mb-4">{error || 'Business not found'}</div>
+            <div className="text-sm text-gray-600 mb-6">Business ID: {params.id}</div>
+            <div className="space-x-4">
+              <Link 
+                href="/admin" 
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Back to Admin Dashboard
+              </Link>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
