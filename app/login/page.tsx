@@ -13,6 +13,50 @@ import { Label } from "@/components/ui/label"
 import { useAuth } from "@/contexts/AuthContext"
 import { toast } from "react-hot-toast"
 
+// Function to convert Firebase error codes to user-friendly messages
+const getErrorMessage = (error: any, isLogin: boolean): string => {
+  const errorCode = error?.code || error?.message || ''
+  
+  // Common Firebase Auth error codes
+  switch (errorCode) {
+    // Login errors
+    case 'auth/user-not-found':
+      return 'No account found with this email. Please check your email or sign up for a new account.'
+    case 'auth/wrong-password':
+      return 'Incorrect password. Please check your password and try again.'
+    case 'auth/invalid-email':
+      return 'Please enter a valid email address.'
+    case 'auth/user-disabled':
+      return 'This account has been disabled. Please contact support.'
+    case 'auth/too-many-requests':
+      return 'Too many failed attempts. Please try again later.'
+    
+    // Signup errors
+    case 'auth/email-already-in-use':
+      return 'An account with this email already exists. Please sign in instead.'
+    case 'auth/weak-password':
+      return 'Password is too weak. Please choose a stronger password (at least 6 characters).'
+    case 'auth/invalid-password':
+      return 'Password is invalid. Please choose a different password.'
+    
+    // Network/technical errors
+    case 'auth/network-request-failed':
+      return 'Network error. Please check your internet connection and try again.'
+    case 'auth/operation-not-allowed':
+      return 'This operation is not allowed. Please contact support.'
+    case 'auth/internal-error':
+      return 'An internal error occurred. Please try again.'
+    
+    // Default fallback
+    default:
+      if (isLogin) {
+        return 'Unable to sign in. Please check your email and password, or try signing up for a new account.'
+      } else {
+        return 'Unable to create account. Please check your information and try again.'
+      }
+  }
+}
+
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState("")
@@ -36,7 +80,8 @@ export default function LoginPage() {
       }
       router.push("/create")
     } catch (error: any) {
-      toast.error(error.message || "Authentication failed")
+      const userFriendlyMessage = getErrorMessage(error, isLogin)
+      toast.error(userFriendlyMessage)
     } finally {
       setLoading(false)
     }
