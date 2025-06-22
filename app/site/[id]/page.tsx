@@ -14,7 +14,7 @@ export default async function SitePage({ params }: PageProps) {
   try {
     // Add timestamp to ensure fresh data
     const timestamp = Date.now();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/business?id=${params.id}&t=${timestamp}`, {
+    const response = await fetch(`/api/business?id=${params.id}&t=${timestamp}`, {
       cache: 'no-store',
       headers: {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
