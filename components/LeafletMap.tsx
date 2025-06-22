@@ -22,6 +22,14 @@ export default function LeafletMap({ location }: LeafletMapProps) {
     // Wait for the container to be available
     if (!mapContainerRef.current) return
 
+    // Fix Leaflet default icon issue
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iNDEiIHZpZXdCb3g9IjAgMCAyNSA0MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyLjUgMEM1LjU5NiAwIDAgNS41OTYgMCAxMi41QzAgMTkuNDA0IDUuNTk2IDI1IDEyLjUgMjVDMTkuNDA0IDI1IDI1IDE5LjQwNCAyNSAxMi41QzI1IDUuNTk2IDE5LjQwNCAwIDEyLjUgMFoiIGZpbGw9IiMzMzMiLz4KPHBhdGggZD0iTTEyLjUgNkM5LjQ2MiA2IDcgOC40NjIgNyAxMS41QzcgMTQuNTM4IDkuNDYyIDE3IDEyLjUgMTdDMTUuNTM4IDE3IDE4IDE0LjUzOCAxOCAxMS41QzE4IDguNDYyIDE1LjUzOCA2IDEyLjUgNloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+      iconUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iNDEiIHZpZXdCb3g9IjAgMCAyNSA0MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyLjUgMEM1LjU5NiAwIDAgNS41OTYgMCAxMi41QzAgMTkuNDA0IDUuNTk2IDI1IDEyLjUgMjVDMTkuNDA0IDI1IDI1IDE5LjQwNCAyNSAxMi41QzI1IDUuNTk2IDE5LjQwNCAwIDEyLjUgMFoiIGZpbGw9IiMzMzMiLz4KPHBhdGggZD0iTTEyLjUgNkM5LjQ2MiA2IDcgOC40NjIgNyAxMS41QzcgMTQuNTM4IDkuNDYyIDE3IDEyLjUgMTdDMTUuNTM4IDE3IDE4IDE0LjUzOCAxOCAxMS41QzE4IDguNDYyIDE1LjUzOCA2IDEyLjUgNloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+      shadowUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDEiIGhlaWdodD0iNDEiIHZpZXdCb3g9IjAgMCA0MSA0MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAuNSIgY3k9IjIwLjUiIHI9IjE4LjUiIGZpbGw9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K'
+    });
+
     // Initialize the map
     const map = L.map(mapContainerRef.current).setView([9.0820, 8.6753], 13)
     mapRef.current = map

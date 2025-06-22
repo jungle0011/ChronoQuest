@@ -10,10 +10,22 @@ interface PageProps {
   }
 }
 
+// UUID validation function
+function isValidUUID(id: string): boolean {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(id);
+}
+
 export default async function SitePage({ params }: PageProps) {
   try {
     // Debug logging
     console.log('SitePage: Received params.id:', params.id);
+    
+    // Validate that the ID is a proper UUID
+    if (!isValidUUID(params.id)) {
+      console.error('SitePage: Invalid business ID format:', params.id);
+      notFound();
+    }
     
     // Add timestamp to ensure fresh data
     const timestamp = Date.now();
