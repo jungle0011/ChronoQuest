@@ -52,18 +52,35 @@ function ProfilePageContent() {
       loadUserBusinesses()
       getCurrentUserPlan().then(setPlan)
       setEmail(user.email || '')
+      
+      // Try to fetch user profile data, but don't fail if it doesn't work
       fetch(`/api/admin/users/${user.uid}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Failed to fetch user data')
+          }
+          return res.json()
+        })
         .then(data => {
-          setName(data.name || '')
+          setName(data.name || user.displayName || '')
           if (data.billingCycle) setBillingCycle(data.billingCycle)
           else if (user.billingCycle) setBillingCycle(user.billingCycle)
           if (data.planUpdatedAt) setPlanUpdatedAt(data.planUpdatedAt)
           else if (user.planUpdatedAt) setPlanUpdatedAt(user.planUpdatedAt)
           if (data.joinedDate) setJoinedDate(data.joinedDate)
         })
-        .catch(() => toast({ title: 'Failed to load profile', variant: 'destructive' }))
+        .catch((error) => {
+          console.warn('Failed to load user profile data:', error)
+          // Use fallback values from user object
+          setName(user.displayName || '')
+          if (user.billingCycle) setBillingCycle(user.billingCycle)
+          if (user.planUpdatedAt) setPlanUpdatedAt(user.planUpdatedAt)
+          // Don't show error toast for this - it's not critical
+        })
         .finally(() => setLoading(false))
+    } else {
+      // If no user, stop loading
+      setLoading(false)
     }
   }, [user])
 

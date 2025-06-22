@@ -12,13 +12,13 @@ let isInitialized = false
 let initializationPromise: Promise<any> | null = null
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6Kddy2NXjdUPQ_lSF8hL3BO65TFitqSo",
-  authDomain: "bizplannaija.firebaseapp.com",
-  projectId: "bizplannaija",
-  storageBucket: "bizplannaija.firebasestorage.app",
-  messagingSenderId: "126865553718",
-  appId: "1:126865553718:web:b2c6220ddbc24424531b97",
-  measurementId: "G-J2H7B67SSG",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyB6Kddy2NXjdUPQ_lSF8hL3BO65TFitqSo",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "bizplannaija.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "bizplannaija",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "bizplannaija.firebasestorage.app",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "126865553718",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:126865553718:web:b2c6220ddbc24424531b97",
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-J2H7B67SSG",
 }
 
 export const initializeFirebaseClient = async () => {

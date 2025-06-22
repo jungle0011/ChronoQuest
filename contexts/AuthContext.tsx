@@ -52,14 +52,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true)
     setError(null)
     console.log('[AuthProvider] Starting Firebase initialization...')
+    
+    // Shorter timeout for better UX
     let timeout = setTimeout(() => {
       if (isMounted) {
-        setError('Firebase initialization timed out. Please check your network and Firebase config.')
+        console.warn('[AuthProvider] Firebase initialization taking longer than expected...')
+        // Don't set error immediately, just log warning
+      }
+    }, 5000) // Reduced from 10s to 5s for warning
+    
+    // Final timeout to prevent infinite loading
+    let finalTimeout = setTimeout(() => {
+      if (isMounted) {
+        setError('Firebase initialization timed out. Please check your network and refresh the page.')
         setLoading(false)
         setInitialized(true)
         console.error('[AuthProvider] Firebase initialization timed out.')
       }
-    }, 10000)
+    }, 15000) // 15 seconds total timeout
+    
     initializeFirebaseClient().then(() => {
       if (!isMounted) return
       console.log('[AuthProvider] Firebase initialized.')
@@ -67,6 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
         if (!isMounted) return
         clearTimeout(timeout)
+        clearTimeout(finalTimeout)
         console.log('[AuthProvider] onAuthStateChanged fired:', firebaseUser)
         if (firebaseUser) {
           setUser({
@@ -83,14 +95,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }).catch((initError) => {
       if (!isMounted) return
       clearTimeout(timeout)
+      clearTimeout(finalTimeout)
       setError("Failed to initialize Firebase: " + (initError?.message || initError))
       setLoading(false)
       setInitialized(true)
       console.error('[AuthProvider] Firebase initialization error:', initError)
     })
+    
     return () => {
       isMounted = false
       clearTimeout(timeout)
+      clearTimeout(finalTimeout)
       if (unsubscribe) unsubscribe()
     }
   }, [])

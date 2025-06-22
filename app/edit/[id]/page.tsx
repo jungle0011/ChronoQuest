@@ -859,9 +859,7 @@ export default function EditPage({ params }: EditPageProps) {
 
 // Add fetch-based loader for business data
 async function fetchBusiness(id: string) {
-  // Use absolute URL for server-side fetch
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${baseUrl}/api/business?id=${id}`);
+  const res = await fetch(`/api/business?id=${id}`);
   if (!res.ok) throw new Error('Failed to fetch business');
   return res.json();
 }
