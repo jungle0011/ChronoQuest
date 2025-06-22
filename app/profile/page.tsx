@@ -16,6 +16,8 @@ import {
   FaGlobe,
   FaChartLine,
   FaSpinner,
+  FaCopy,
+  FaChevronDown,
 } from "react-icons/fa"
 import { useToast } from '@/hooks/use-toast'
 import { useAuth } from "@/contexts/AuthContext"
@@ -44,8 +46,10 @@ function ProfilePageContent() {
   const [joinedDate, setJoinedDate] = useState<string | null>(null)
   const wasDowngraded = useRef(false)
   const [customDomain, setCustomDomain] = useState("")
-  const [selectedBusiness, setSelectedBusiness] = useState<string>("")
+  const [selectedBusiness, setSelectedBusiness] = useState("")
   const [isConnecting, setIsConnecting] = useState(false)
+  const [showCopyDropdown, setShowCopyDropdown] = useState(false)
+  const [selectedBusinessForCopy, setSelectedBusinessForCopy] = useState("")
 
   useEffect(() => {
     if (user) {
@@ -83,6 +87,19 @@ function ProfilePageContent() {
       setLoading(false)
     }
   }, [user])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (showCopyDropdown && !target.closest('.copy-dropdown')) {
+        setShowCopyDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showCopyDropdown])
 
   useEffect(() => {
     // If user was downgraded to free (from paid) in this session, show banner
@@ -199,16 +216,40 @@ function ProfilePageContent() {
         title: 'Domain connection initiated!',
         description: `Please add the required DNS records to your domain provider. Verification can take up to 24 hours.`,
       })
-      // Optionally, refresh businesses to show the new domain
-      loadUserBusinesses()
-    } catch (error: any) {
+      setCustomDomain('')
+    } catch (error) {
       toast({
-        title: 'Error connecting domain',
-        description: error.message,
-        variant: 'destructive',
+        title: 'Failed to connect domain',
+        description: error instanceof Error ? error.message : 'Unknown error',
+        variant: 'destructive'
       })
     } finally {
       setIsConnecting(false)
+    }
+  }
+
+  const handleCopySiteLink = async () => {
+    if (!selectedBusinessForCopy) {
+      toast({ title: 'Please select a site to copy link', variant: 'destructive' })
+      return
+    }
+
+    const siteUrl = `${window.location.origin}/site/${selectedBusinessForCopy}`
+    
+    try {
+      await navigator.clipboard.writeText(siteUrl)
+      toast({ title: 'Site link copied to clipboard!' })
+      setShowCopyDropdown(false)
+    } catch (error) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = siteUrl
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      toast({ title: 'Site link copied to clipboard!' })
+      setShowCopyDropdown(false)
     }
   }
 
@@ -496,13 +537,62 @@ function ProfilePageContent() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Your Landing Pages</h2>
                     <p className="text-gray-600">Manage and track your business landing pages</p>
                   </div>
-                  <Link
-                    href="/create"
-                    className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg"
-                  >
-                    <FaPlus className="w-4 h-4" />
-                    <span>Create New Page</span>
-                  </Link>
+                  <div className="flex space-x-3">
+                    {businesses.length > 0 && (
+                      <div className="relative">
+                        <button
+                          onClick={() => setShowCopyDropdown(!showCopyDropdown)}
+                          className="flex items-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg"
+                        >
+                          <FaCopy className="w-4 h-4" />
+                          <span>Copy Site Link</span>
+                          <FaChevronDown className="w-3 h-3" />
+                        </button>
+                        
+                        {showCopyDropdown && (
+                          <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50 copy-dropdown">
+                            <div className="p-4">
+                              <h4 className="text-sm font-semibold text-gray-900 mb-3">Select a site to copy link:</h4>
+                              <select
+                                value={selectedBusinessForCopy}
+                                onChange={(e) => setSelectedBusinessForCopy(e.target.value)}
+                                className="w-full p-2 border border-gray-300 rounded-lg mb-3 text-sm"
+                              >
+                                <option value="">Choose a site...</option>
+                                {businesses.map((business) => (
+                                  <option key={business.id} value={business.id}>
+                                    {business.businessName}
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="flex space-x-2">
+                                <button
+                                  onClick={handleCopySiteLink}
+                                  disabled={!selectedBusinessForCopy}
+                                  className="flex-1 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                  Copy Link
+                                </button>
+                                <button
+                                  onClick={() => setShowCopyDropdown(false)}
+                                  className="px-3 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 text-sm"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <Link
+                      href="/create"
+                      className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg"
+                    >
+                      <FaPlus className="w-4 h-4" />
+                      <span>Create New Page</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
 
