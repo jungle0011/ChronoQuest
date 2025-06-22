@@ -169,14 +169,15 @@ function CreatePageContent() {
       const res = await fetch('/api/business', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData }),
+        body: JSON.stringify({ userId: user?.uid, formData }),
       })
       if (res.ok) {
         toast.success("🎉 Landing page created successfully!")
         router.push("/profile")
       } else {
         const data = await res.json()
-        toast.error(data.error || "Failed to create landing page. Please try again.")
+        const errorMessage = data.details ? `${data.error}: ${data.details.join(', ')}` : data.error
+        toast.error(errorMessage || "Failed to create landing page. Please try again.")
       }
     } catch (error: any) {
       toast.error(error.message || "Failed to create your landing page. Please try again.")
