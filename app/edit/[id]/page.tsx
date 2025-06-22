@@ -803,14 +803,7 @@ function EditPageContent({ params }: EditPageProps) {
                   <div className="text-center">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">💫 Update Your Landing Page</h3>
                     <p className="text-gray-600 mb-4">Save your changes and update your live landing page</p>
-                    <div className="flex space-x-4 justify-center">
-                      <Link
-                        href={`/site/${params.id}`}
-                        className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg"
-                      >
-                        <FaEye className="w-4 h-4" />
-                        <span>Preview Site</span>
-                      </Link>
+                    <div className="flex justify-center">
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}

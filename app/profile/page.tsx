@@ -576,13 +576,6 @@ function ProfilePageContent() {
                         {/* Actions */}
                         <div className="flex space-x-2">
                           <Link
-                            href={`/site/${business.id}`}
-                            className="flex-1 flex items-center justify-center space-x-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm"
-                          >
-                            <FaEye className="w-3 h-3" />
-                            <span>View</span>
-                          </Link>
-                          <Link
                             href={`/edit/${business.id}`}
                             className="flex-1 flex items-center justify-center space-x-2 bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-sm"
                           >
