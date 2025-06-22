@@ -12,6 +12,9 @@ interface PageProps {
 
 export default async function SitePage({ params }: PageProps) {
   try {
+    // Debug logging
+    console.log('SitePage: Received params.id:', params.id);
+    
     // Add timestamp to ensure fresh data
     const timestamp = Date.now();
     const response = await fetch(`/api/business?id=${params.id}&t=${timestamp}`, {
@@ -23,18 +26,21 @@ export default async function SitePage({ params }: PageProps) {
     });
     
     if (!response.ok) {
+      console.error('SitePage: API response not ok:', response.status, response.statusText);
       throw new Error('Failed to fetch business');
     }
     
     const business = await response.json();
+    console.log('SitePage: Fetched business:', business ? 'Found' : 'Not found');
     
     if (!business) {
+      console.error('SitePage: Business not found for ID:', params.id);
       notFound();
     }
     
     return <SitePageClient business={business} />;
   } catch (error) {
-    console.error('Error fetching business:', error);
+    console.error('SitePage: Error fetching business:', error);
     notFound();
   }
 }
